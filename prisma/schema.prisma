@@ -1,0 +1,42 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Product {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  name               String
+  status             String
+  visibility         String
+  publishOn          DateTime @map("publish_on")
+  catalogVisibility  String   @map("catalog_visibility")
+  description        String
+  regularPrice       Float    @map("regular_price")
+  salePrice          Float?   @map("sale_price")
+  taxStatus          String   @map("tax_status")
+  taxClass           String   @map("tax_class")
+  productLayout      String   @map("product_layout")
+  productStyle       String   @map("product_style")
+  sku                String?  @map("sku")
+  stockManagement    Boolean  @map("stock_management")
+  quantity           Int      @default(0)
+  allowBackorders    String   @default("Do not allow")
+  lowStockThreshold  Int      @default(0) @map("low_stock_threshold")
+  stockStatus        String?  @map("stock_status")
+  soldIndividually   Boolean  @map("sold_individually")
+  totalStockQuantity Int      @default(0) @map("total_stock_quantity")
+  weight             Float
+  shippingClass      String   @map("shipping_class")
+  specifications     Json
+  categories         String[] @map("categories")
+}
+
+model Category {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  parentId String? @map("parent_id") @db.ObjectId
+  name     String
+}
