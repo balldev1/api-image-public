@@ -36,7 +36,7 @@ model Product {
 }
 
 model Category {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  parentId String? @map("parent_id") @db.ObjectId
-  name     String
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  parent_id String? @map("parent_id")
+  name      String
 }
